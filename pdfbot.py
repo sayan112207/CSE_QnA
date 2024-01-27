@@ -89,7 +89,7 @@ def user_input(user_question):
 
 def main():
     st.set_page_config("Chat PDF")
-    st.header("Chat with PDF using Gemini")
+    st.header("KIIT CSE ChatBot")
 
     # Create two columns
     col1, col2 = st.columns(2)
