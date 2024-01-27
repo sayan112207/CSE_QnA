@@ -84,7 +84,7 @@ def main():
             encoded_pdf = base64.b64encode(file.read()).decode("utf-8")
         return encoded_pdf
 
-    pdf_docs = ["https://drive.google.com/file/d/1nMMzGOa6UHeBVnw_UBScUTNgZJwAR5Zz/view?usp=sharing"]
+    pdf_docs = ["KIIT_CSE_SHB_Updated-1.pdf"]
     raw_text = get_pdf_text(pdf_docs)
     text_chunks = get_chunks(raw_text)
     get_vector_store(text_chunks)
