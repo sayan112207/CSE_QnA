@@ -70,22 +70,6 @@ def user_input(user_question):
     )
 
     return response
-    #print(response)
-    #st.write("Reply: ", response["output_text"])
-
-
-#def main():
-#    st.set_page_config("Chat PDF")
-#    st.header("Chat with PDF using Gemini")
-
-#    user_question = st.text_input("Ask a Question from the PDF Files")
-
-#    if user_question:
-#        user_input(user_question)
-#        pdf_docs = ["KIIT_CSE_SHB_Updated-1.pdf"]
-#        raw_text = get_pdf_text(pdf_docs)
-#        text_chunks = get_chunks(raw_text)
-#        get_vector_store(text_chunks)
 
 def main():
     st.set_page_config("Chat PDF")
@@ -114,7 +98,6 @@ def main():
         response = user_input(user_question)  # Generate the response
         print(response)
         col2.write("Reply: " + response["output_text"])
-        #col2.write(response)  # Display the response
 
 if __name__ == "__main__":
     main()
