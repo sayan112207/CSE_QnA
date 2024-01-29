@@ -72,9 +72,30 @@ def user_input(user_question):
     return response
 
 def main():
-    st.set_page_config("Chat PDF")
-    st.header("KIIT CSE ChatBot")
+    st.set_page_config(
+    page_title="KIIT Chat Bot",
+    page_icon="🤖",
+    initial_sidebar_state="expanded",
+)
+    from PIL import Image
 
+    # Open the image file
+    img = Image.open('logo.png')
+
+    # Convert the image to base64
+    import base64
+    from io import BytesIO
+
+    buffered = BytesIO()
+    img.save(buffered, format="PNG")
+    img_str = base64.b64encode(buffered.getvalue()).decode()
+
+    # Display the image in the center
+    st.markdown(f'<p style="text-align: center;"><img src="data:image/png;base64,{img_str}" width="120"></p>', unsafe_allow_html=True)
+
+    st.markdown("<h1 style='text-align: center; color: white;'>KIIT Chat Bot</h1>", unsafe_allow_html=True)
+
+    st.write("Ask questions regarding KIIT School of Computer Engineering Student Handbook")
     # Create two columns
     col1, col2 = st.columns(2)
 
@@ -98,6 +119,7 @@ def main():
         response = user_input(user_question)  # Generate the response
         print(response)
         col2.write("Reply: " + response["output_text"])
+        #col2.write(response)  # Display the response
 
 if __name__ == "__main__":
     main()
