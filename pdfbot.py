@@ -71,6 +71,20 @@ def user_input(user_question):
 
     return response
 
+def displayPDF(file):
+    # Opening file from file path
+    with open(file, "rb") as f:
+        base64_pdf = base64.b64encode(f.read()).decode('utf-8')
+
+    # Embedding PDF in HTML
+    pdf_display =  f"""<embed
+    class="pdfobject"
+    type="application/pdf"
+    title="Embedded PDF"
+    src="data:application/pdf;base64,{base64_pdf}"
+    style="overflow: auto; width: 100%; height: 482px;">"""
+    return pdf_display
+
 def main():
     st.set_page_config(
     page_title="KIIT Chat Bot",
@@ -100,17 +114,8 @@ def main():
     col1, col2 = st.columns(2)
 
     # Display the PDF in the first column
-    def get_base64_of_pdf(pdf_path):
-        with open(pdf_path, "rb") as file:
-            encoded_pdf = base64.b64encode(file.read()).decode("utf-8")
-        return encoded_pdf
-
-    pdf_docs = ["KIIT_CSE_SHB_Updated-1.pdf"]
-    raw_text = get_pdf_text(pdf_docs)
-    text_chunks = get_chunks(raw_text)
-    get_vector_store(text_chunks)
-    b64_pdf = get_base64_of_pdf(pdf_docs[0])
-    pdf_display = f'<iframe src="data:application/pdf;base64,{b64_pdf}" width="100%" height="500px" type="application/pdf"></iframe>'
+    file = "KIIT_CSE_SHB_Updated-1.pdf"
+    pdf_display = displayPDF(file)
     col1.markdown(pdf_display, unsafe_allow_html=True)
 
     # Display the Q&A in the second column
@@ -119,7 +124,6 @@ def main():
         response = user_input(user_question)  # Generate the response
         print(response)
         col2.write("Reply: " + response["output_text"])
-        #col2.write(response)  # Display the response
 
 if __name__ == "__main__":
     main()
