@@ -77,7 +77,7 @@ def displayPDF(file):
         base64_pdf = base64.b64encode(f.read()).decode('utf-8')
 
     # Embedding PDF in HTML
-    pdf_display =  f"""<embed
+    pdf_display =  f"""<iframe
     class="pdfobject"
     type="application/pdf"
     title="Embedded PDF"
